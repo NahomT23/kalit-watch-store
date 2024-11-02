@@ -1,0 +1,2 @@
+- Define the code and remove comments
+- Deploy it on my portfolio
