@@ -391,17 +391,16 @@ app.post("/api/sendOrderToTelegram", async (req, res) => {
     }
 });
 
-ViteExpress.listen(app, () =>
+ViteExpress.listen(app, 3000, () =>
     console.log("Server is listening on port 3000...")
 );
 
 
-// https://7c1c-102-213-69-44.ngrok-free.app
 const setWebhook = async () => {
     try {
-        const webhookUrl = `http://kalit-watch-store-g8gq.vercel.app/${TELEGRAM_BOT_TOKEN}`;
+        const webhookUrl = `https://b474-102-213-69-44.ngrok-free.app/${TELEGRAM_BOT_TOKEN}`;
         const response = await axios.post(
-            `http://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/setWebhook`,
+            `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/setWebhook`,
             {
                 url: webhookUrl,
             }
