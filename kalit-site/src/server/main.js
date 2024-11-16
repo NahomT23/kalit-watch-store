@@ -391,13 +391,13 @@ app.post("/api/sendOrderToTelegram", async (req, res) => {
     }
 });
 
-ViteExpress.listen(app, 3000, () =>
+ViteExpress.listen(app, () =>
     console.log("Server is listening on port 3000...")
 );
 
 const setWebhook = async () => {
     try {
-        const webhookUrl = `https://c187-102-213-69-44.ngrok-free.app/${TELEGRAM_BOT_TOKEN}`;
+        const webhookUrl = `https://7c1c-102-213-69-44.ngrok-free.app/${TELEGRAM_BOT_TOKEN}`;
         const response = await axios.post(
             `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/setWebhook`,
             {
