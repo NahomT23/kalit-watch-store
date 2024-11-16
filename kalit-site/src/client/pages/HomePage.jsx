@@ -166,7 +166,7 @@ function HomePage() {
         <div className="app-container flex flex-col items-center">
             <div className="flex justify-center text-center">
                 <p className="w-full whitespace-nowrap overflow-hidden animate-typing font-baskervville text-3xl text-red-950 my-2">
-                    KALIT WATCH STOREee
+                    KALIT WATCH STORE
                 </p>
             </div>
             <SearchAndFilter
