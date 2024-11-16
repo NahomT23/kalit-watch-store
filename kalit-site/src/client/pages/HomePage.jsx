@@ -113,7 +113,7 @@ function HomePage() {
     useEffect(() => {
         const fetchLatestItems = async () => {
             try {
-                const response = await fetch("/api/items");
+                const response = await fetch("https://kalit-watch-store-ar67.vercel.app/api/items");
                 if (!response.ok) {
                     const errorText = await response.text();
                     console.error(`Error fetching items: ${response.status} - ${errorText}`);
@@ -133,7 +133,7 @@ function HomePage() {
 
     const handleSendToTelegram = async (id, name, price) => {
         try {
-            await fetch("/api/sendToTelegram", {
+            await fetch("https://kalit-watch-store-ar67.vercel.app/api/sendToTelegram", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ id, name, price }),
@@ -166,7 +166,7 @@ function HomePage() {
         <div className="app-container flex flex-col items-center">
             <div className="flex justify-center text-center">
                 <p className="w-full whitespace-nowrap overflow-hidden animate-typing font-baskervville text-3xl text-red-950 my-2">
-                    KALIT WATCH STOREe
+                    KALIT WATCH STOREee
                 </p>
             </div>
             <SearchAndFilter
