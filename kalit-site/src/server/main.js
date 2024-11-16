@@ -334,18 +334,18 @@ app.post(`/${TELEGRAM_BOT_TOKEN}`, async (req, res) => {
 });
 
 // Serve the latest items via an API endpoint
-app.get("https://kalit-watch-store-ar67.vercel.app/api/items", async (req, res) => {
+app.get("https://localhost:3000/api/items", async (req, res) => {
     res.json(items);
 });
 
 // Provide item IDs endpoint
-app.get("https://kalit-watch-store-ar67.vercel.app/api/item-ids", (req, res) => {
+app.get("https://localhost:3000/api/item-ids", (req, res) => {
     res.json({ itemIds: items.map(item => item.id) });
 });
 
 
 
-app.post("https://kalit-watch-store-ar67.vercel.app/api/sendOrderToTelegram", async (req, res) => {
+app.post("https://localhost:3000/api/sendOrderToTelegram", async (req, res) => {
     const { totalAmount, items, userId, userName } = req.body;
     const dateTime = new Date().toLocaleString();
 
