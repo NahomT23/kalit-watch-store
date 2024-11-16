@@ -3,6 +3,8 @@
 // import axios from "axios";
 // import { configDotenv } from "dotenv";
 // configDotenv();
+// import Stripe from 'stripe';
+// const stripe = new Stripe(process.env.STRIPE_SECRET_KEY); // Ensure this key is correct
 
 // const TELEGRAM_BOT_TOKEN = process.env.BOT_TOKEN;
 // const TELEGRAM_CHAT_ID = process.env.CHAT_ID;
@@ -114,6 +116,43 @@
 
 
 
+
+// app.post('/create-checkout-session', async (req, res) => {
+//     console.log('Received request to create checkout session:', req.body); // Log the incoming request body
+//     try {
+//         const session = await stripe.checkout.sessions.create({
+//             payment_method_types: ['card'],
+//             mode: 'payment',
+//             line_items: req.body.items.map(item => {
+//                 const storeItem = items.find(i => i.id === item.id);
+//                 if (!storeItem) {
+//                     console.error(`Item not found: ${item.id}`); // Log if item is not found
+//                     throw new Error(`Item not found: ${item.id}`);
+//                 }
+//                 return {
+//                     price_data: {
+//                         currency: 'usd',
+//                         product_data: {
+//                             name: storeItem.name,
+//                         },
+//                         unit_amount: Math.round(storeItem.price * 100),
+//                     },
+//                     quantity: item.quantity,
+//                 };
+//             }),
+//             success_url: `${process.env.SERVER_URL}`,
+//             cancel_url: `${process.env.SERVER_URL}`,
+//         });
+//         res.json({ url: session.url });
+//     } catch (err) {
+//         console.error('Error creating checkout session:', err); // Log the error details
+//         res.status(500).json({ message: 'Internal Server Error', error: err.message });
+//     }
+// });
+
+
+
+
 // app.post("/api/sendOrderToTelegram", async (req, res) => {
 //     const { totalAmount, items, userId, userName } = req.body;
 //     const dateTime = new Date().toLocaleString();
@@ -168,7 +207,7 @@
 // // Set the webhook for Telegram
 // const setWebhook = async () => {
 //     try {
-//         const webhookUrl = `https://b190-102-218-51-157.ngrok-free.app/${TELEGRAM_BOT_TOKEN}`;
+//         const webhookUrl = `https://4981-102-218-50-140.ngrok-free.app/${TELEGRAM_BOT_TOKEN}`;
 //         const response = await axios.post(
 //             `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/setWebhook`,
 //             {
@@ -190,13 +229,12 @@
 
 
 
+
 import express from "express";
 import ViteExpress from "vite-express";
 import axios from "axios";
 import { configDotenv } from "dotenv";
 configDotenv();
-import Stripe from 'stripe';
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY); // Ensure this key is correct
 
 const TELEGRAM_BOT_TOKEN = process.env.BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.CHAT_ID;
@@ -234,7 +272,6 @@ app.post(`/${TELEGRAM_BOT_TOKEN}`, async (req, res) => {
     if (message) {
         const { caption, photo, message_id, media_group_id } = message;
 
-        // Check if this is part of a media group
         let item = items.find((item) => item.media_group_id === media_group_id);
 
         if (caption) {
@@ -280,7 +317,7 @@ app.post(`/${TELEGRAM_BOT_TOKEN}`, async (req, res) => {
             if (imageUrl) {
                 if (!item) {
                     item = {
-                        id: nextItemId++, // Assign and increment item ID
+                        id: nextItemId++,
                         message_id,
                         media_group_id,
                         imageUrls: [imageUrl],
@@ -305,43 +342,6 @@ app.get("/api/items", async (req, res) => {
 app.get("/api/item-ids", (req, res) => {
     res.json({ itemIds: items.map(item => item.id) });
 });
-
-
-
-
-app.post('/create-checkout-session', async (req, res) => {
-    console.log('Received request to create checkout session:', req.body); // Log the incoming request body
-    try {
-        const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['card'],
-            mode: 'payment',
-            line_items: req.body.items.map(item => {
-                const storeItem = items.find(i => i.id === item.id);
-                if (!storeItem) {
-                    console.error(`Item not found: ${item.id}`); // Log if item is not found
-                    throw new Error(`Item not found: ${item.id}`);
-                }
-                return {
-                    price_data: {
-                        currency: 'usd',
-                        product_data: {
-                            name: storeItem.name,
-                        },
-                        unit_amount: Math.round(storeItem.price * 100),
-                    },
-                    quantity: item.quantity,
-                };
-            }),
-            success_url: `${process.env.SERVER_URL}`,
-            cancel_url: `${process.env.SERVER_URL}`,
-        });
-        res.json({ url: session.url });
-    } catch (err) {
-        console.error('Error creating checkout session:', err); // Log the error details
-        res.status(500).json({ message: 'Internal Server Error', error: err.message });
-    }
-});
-
 
 
 
@@ -391,15 +391,13 @@ app.post("/api/sendOrderToTelegram", async (req, res) => {
     }
 });
 
-// Start the server
 ViteExpress.listen(app, 3000, () =>
     console.log("Server is listening on port 3000...")
 );
 
-// Set the webhook for Telegram
 const setWebhook = async () => {
     try {
-        const webhookUrl = `https://kalit-watch-store-5lk7-git-main-nahomt23s-projects.vercel.app/${TELEGRAM_BOT_TOKEN}`;
+        const webhookUrl = `https://c187-102-213-69-44.ngrok-free.app/${TELEGRAM_BOT_TOKEN}`;
         const response = await axios.post(
             `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/setWebhook`,
             {
@@ -416,5 +414,4 @@ const setWebhook = async () => {
 };
 
 setWebhook();
-
 
