@@ -399,9 +399,9 @@ ViteExpress.listen(app, () =>
 // https://7c1c-102-213-69-44.ngrok-free.app
 const setWebhook = async () => {
     try {
-        const webhookUrl = `https://kalit-watch-store-ar67.vercel.app/${TELEGRAM_BOT_TOKEN}`;
+        const webhookUrl = `http://kalit-watch-store-g8gq.vercel.app/${TELEGRAM_BOT_TOKEN}`;
         const response = await axios.post(
-            `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/setWebhook`,
+            `http://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/setWebhook`,
             {
                 url: webhookUrl,
             }
