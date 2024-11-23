@@ -334,18 +334,18 @@ app.post(`/${TELEGRAM_BOT_TOKEN}`, async (req, res) => {
 });
 
 // Serve the latest items via an API endpoint
-app.get("https://8d7e-102-218-50-227.ngrok-free.app/api/items", async (req, res) => {
+app.get("kalit/api/items", async (req, res) => {
     res.json(items);
 });
 
 // Provide item IDs endpoint
-app.get("https://8d7e-102-218-50-227.ngrok-free.app/api/item-ids", (req, res) => {
+app.get("kalit/api/item-ids", (req, res) => {
     res.json({ itemIds: items.map(item => item.id) });
 });
 
 
 
-app.post("https://8d7e-102-218-50-227.ngrok-free.app/api/sendOrderToTelegram", async (req, res) => {
+app.post("kalit/api/sendOrderToTelegram", async (req, res) => {
     const { totalAmount, items, userId, userName } = req.body;
     const dateTime = new Date().toLocaleString();
 
