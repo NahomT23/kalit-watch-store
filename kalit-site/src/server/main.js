@@ -398,7 +398,7 @@ ViteExpress.listen(app, 3000, () =>
 
 const setWebhook = async () => {
     try {
-        const webhookUrl = `https://b474-102-213-69-44.ngrok-free.app/${TELEGRAM_BOT_TOKEN}`;
+        const webhookUrl = `https://8d7e-102-218-50-227.ngrok-free.app/${TELEGRAM_BOT_TOKEN}`;
         const response = await axios.post(
             `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/setWebhook`,
             {
