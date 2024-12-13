@@ -1,6 +1,4 @@
 
-Here's a detailed README for your e-commerce website project:
-
 E-Commerce Platform with Telegram Bot Integration
 A powerful and user-friendly e-commerce platform built with React, Express, Node.js, Stripe, Tailwind CSS, Firebase Database and Auth, and the Telegram Bot API. This platform allows store owners to manage products, process purchases, and sync data seamlessly between the website and Telegram.
 
