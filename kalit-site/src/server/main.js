@@ -417,16 +417,16 @@
 // setWebhook();
 
 
-
+// Import necessary modules
 import express from "express";
 import ViteExpress from "vite-express";
 import axios from "axios";
 import { configDotenv } from "dotenv";
 configDotenv();
 
+// Environment variables
 const TELEGRAM_BOT_TOKEN = process.env.BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.CHAT_ID;
-const BASE_URL = process.env.BASE_URL; // Your deployed Vercel domain
 
 const app = express();
 app.use(express.json());
@@ -466,19 +466,23 @@ app.post(`/${TELEGRAM_BOT_TOKEN}`, async (req, res) => {
         if (caption) {
             const lines = caption.split("\n").map(line => line.trim());
 
+            // Extract the first three lines as name, description, and price
             const name = lines[0] || "";
             const description = lines[1] || "";
             const price = lines[2] || "";
+
+            // Everything after the third line is treated as specs
             const specs = lines.slice(3).join("\n");
 
             if (caption.includes("DELETE")) {
+                // Remove item if caption contains "DELETE"
                 items = items.filter((item) => item.media_group_id !== media_group_id);
                 return res.send("Item deleted");
             }
 
             if (!item) {
                 item = {
-                    id: nextItemId++, 
+                    id: nextItemId++, // Assign and increment item ID
                     message_id,
                     media_group_id,
                     name,
@@ -528,12 +532,18 @@ app.get("/api/item-ids", (req, res) => {
     res.json({ itemIds: items.map(item => item.id) });
 });
 
+// Handle order submission to Telegram
 app.post("/api/sendOrderToTelegram", async (req, res) => {
     const { totalAmount, items, userId, userName } = req.body;
     const dateTime = new Date().toLocaleString();
 
     try {
-        const itemsList = items.map(item => `Name: ${item.name}\nDescription: ${item.description}\nQuantity: ${item.quantity}\nPrice: ${item.price}`).join("\n\n");
+        const itemsList = items.map(item => `
+            Name: ${item.name}
+            Description: ${item.description}
+            Quantity: ${item.quantity}
+            Price: ${item.price}
+        `).join("\n\n");
 
         const message = `
         **New Order Received**
@@ -569,13 +579,14 @@ app.post("/api/sendOrderToTelegram", async (req, res) => {
     }
 });
 
-ViteExpress.listen(app, 3000, () =>
-    console.log("Server is listening on port 3000...")
-);
-
+// Configure webhook during deployment
 const setWebhook = async () => {
     try {
-        const webhookUrl = `${BASE_URL}/${TELEGRAM_BOT_TOKEN}`;
+        const vercelUrl = process.env.BASE_URL || "";
+        if (!vercelUrl) {
+            throw new Error("VERCEL_URL environment variable is not set.");
+        }
+        const webhookUrl = `${vercelUrl}/${TELEGRAM_BOT_TOKEN}`;
         const response = await axios.post(
             `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/setWebhook`,
             {
@@ -592,3 +603,8 @@ const setWebhook = async () => {
 };
 
 setWebhook();
+
+// Start the server
+ViteExpress.listen(app, 3000, () =>
+    console.log("Server is listening on port 3000...")
+);
