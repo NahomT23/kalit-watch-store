@@ -1,4 +1,0 @@
-// export default function handler(req, res) {
-//     const items = [];  // This should be your actual items array or database query
-//     res.json({ itemIds: items.map(item => item.id) });
-// }

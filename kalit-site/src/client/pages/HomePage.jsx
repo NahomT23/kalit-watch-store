@@ -15,7 +15,7 @@ function HomePage() {
     useEffect(() => {
         const fetchLatestItems = async () => {
             try {
-                const response = await fetch("kalit/api/items");
+                const response = await fetch("api/items");
                 if (!response.ok) {
                     const errorText = await response.text();
                     console.error(`Error fetching items: ${response.status} - ${errorText}`);
@@ -35,7 +35,7 @@ function HomePage() {
 
     const handleSendToTelegram = async (id, name, price) => {
         try {
-            await fetch("kalit/api/sendToTelegram", {
+            await fetch("api/sendToTelegram", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ id, name, price }),
