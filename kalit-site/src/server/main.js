@@ -182,6 +182,10 @@ const setWebhook = async () => {
 
 setWebhook();
 
+app.get("/", (req, res) => {
+    res.send("Welcome to Kalit Watch Store API!");
+});
+
 
 
 ViteExpress.listen(app, 3000, () =>
