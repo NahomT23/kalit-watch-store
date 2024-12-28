@@ -57,11 +57,11 @@ const Cart = () => {
             })
             .then(data => {
                 if (data.url) {
-                    window.location.href = data.url; // Redirect to the checkout page
+                    window.location.href = data.url; 
                 }
             })
             .catch(error => {
-                console.error('Error creating checkout session:', error); // Log the error details
+                console.error('Error creating checkout session:', error);
             });
     
             const itemsData = Object.values(cartItems).map(item => ({
@@ -82,7 +82,7 @@ const Cart = () => {
             });
     
 
-            // Show success toast notification
+
             toast.success("Purchase was successful!");
     
             await fetch("/api/sendOrderToTelegram", {

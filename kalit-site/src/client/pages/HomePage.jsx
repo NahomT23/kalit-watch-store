@@ -19,7 +19,7 @@ function HomePage() {
                 if (!response.ok) {
                     const errorText = await response.text();
                     console.error(`Error fetching items: ${response.status} - ${errorText}`);
-                    return; // Exit the function if there's an error
+                    return; 
                 }
                 const data = await response.json();
                 setItems(data);

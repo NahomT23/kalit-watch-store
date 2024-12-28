@@ -167,9 +167,29 @@ ViteExpress.listen(app, 3000, () =>
 );
 
 
+// const setWebhook = async () => {
+//     try {
+//         const webhookUrl = `https://vercel-free.app/${TELEGRAM_BOT_TOKEN}`;
+//         const response = await axios.post(
+//             `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/setWebhook`,
+//             {
+//                 url: webhookUrl,
+//             }
+//         );
+//         console.log("Webhook set:", response.data);
+//     } catch (error) {
+//         console.error(
+//             "Error setting webhook:",
+//             error.response ? error.response.data : error.message
+//         );
+//     }
+// };
+// setWebhook();
+
+
 const setWebhook = async () => {
     try {
-        const webhookUrl = `https://2f56-102-213-68-104.ngrok-free.app/${TELEGRAM_BOT_TOKEN}`;
+        const webhookUrl = `https://vercel-free.app/${TELEGRAM_BOT_TOKEN}`; 
         const response = await axios.post(
             `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/setWebhook`,
             {
@@ -178,11 +198,9 @@ const setWebhook = async () => {
         );
         console.log("Webhook set:", response.data);
     } catch (error) {
-        console.error(
-            "Error setting webhook:",
-            error.response ? error.response.data : error.message
-        );
+        console.error("Error setting webhook:", error.response?.data || error.message);
     }
 };
+
 
 setWebhook();
