@@ -85,7 +85,7 @@ const Cart = () => {
 
             toast.success("Purchase was successful!");
     
-            await fetch("/api/sendOrderToTelegram", {
+            await fetch("https://kalit-watch-store.vercel.app/api/sendOrderToTelegram", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ 
