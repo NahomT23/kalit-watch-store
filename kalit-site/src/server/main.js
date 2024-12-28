@@ -162,29 +162,6 @@ app.post("/api/sendOrderToTelegram", async (req, res) => {
     }
 });
 
-ViteExpress.listen(app, 3000, () =>
-    console.log("Server is listening on port 3000...")
-);
-
-
-// const setWebhook = async () => {
-//     try {
-//         const webhookUrl = `https://vercel-free.app/${TELEGRAM_BOT_TOKEN}`;
-//         const response = await axios.post(
-//             `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/setWebhook`,
-//             {
-//                 url: webhookUrl,
-//             }
-//         );
-//         console.log("Webhook set:", response.data);
-//     } catch (error) {
-//         console.error(
-//             "Error setting webhook:",
-//             error.response ? error.response.data : error.message
-//         );
-//     }
-// };
-// setWebhook();
 
 
 const setWebhook = async () => {
@@ -204,3 +181,9 @@ const setWebhook = async () => {
 
 
 setWebhook();
+
+
+
+ViteExpress.listen(app, 3000, () =>
+    console.log("Server is listening on port 3000...")
+);
