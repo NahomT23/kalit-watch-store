@@ -166,7 +166,7 @@ app.post("/api/sendOrderToTelegram", async (req, res) => {
 
 const setWebhook = async () => {
     try {
-        const webhookUrl = `https://kalit-watch-store.vercel.app/${TELEGRAM_BOT_TOKEN}`; 
+        const webhookUrl = `https://kalit-watch-store.vercel.app/`; 
         const response = await axios.post(
             `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/setWebhook`,
             {
@@ -181,10 +181,6 @@ const setWebhook = async () => {
 
 
 setWebhook();
-
-app.get("/", (req, res) => {
-    res.send("Welcome to Kalit Watch Store API!");
-});
 
 
 
